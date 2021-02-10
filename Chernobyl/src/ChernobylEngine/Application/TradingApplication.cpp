@@ -84,7 +84,7 @@ namespace Chernobyl
 	}
 
 	//Buy
-	void TradingApplication::BuyWithLimit(std::string symbol, int amount, float limitPrice = 1) 
+	void TradingApplication::BuyWithLimit(std::string symbol, int amount, float limitPrice) 
 	{
 
 	}
@@ -110,7 +110,7 @@ namespace Chernobyl
 
 	}
 
-	void TradingApplication::SellWithLimit(std::string symbol, int amount, float limitPrice = 1)
+	void TradingApplication::SellWithLimit(std::string symbol, int amount, float limitPrice)
 	{
 
 	}

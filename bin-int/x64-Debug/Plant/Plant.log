@@ -1,5 +1,0 @@
-﻿  ChernobylPlant.cpp
-C:\SDK\vcpkg-master\installed\x64-windows\include\websocketpp\frame.hpp(834,25): warning C4267: '=': conversion from 'size_t' to 'uint32_t', possible loss of data
-C:\SDK\vcpkg-master\installed\x64-windows\include\websocketpp\common\md5.hpp(367,34): warning C4267: '+=': conversion from 'size_t' to 'websocketpp::md5::md5_word_t', possible loss of data
-C:\SDK\vcpkg-master\installed\x64-windows\include\websocketpp\sha1\sha1.hpp(176,28): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
-  Plant.vcxproj -> C:\Projects\Chernobyl\Chernobyl\bin\x64-Debug\Plant\Plant.exe

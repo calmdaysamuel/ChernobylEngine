@@ -7,9 +7,7 @@ class TestApplication: public Chernobyl::TradingApplication
 	void Awake()
 	{
 		//Subscribe("AAPL");
-		BindAnyTradeReceived(
-			TradeReceived
-		);
+		
 
 	}
 

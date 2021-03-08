@@ -201,6 +201,7 @@ namespace Chernobyl
 		Awake();
 		while (true)
 		{
+			
 			ApplicationTime.SetStartTime();
 			Update();
 			LateUpdate();

@@ -4,11 +4,13 @@
 
 
 namespace Chernobyl {
+
+	// Time format hh:mm:ss
 	class CHERNOBYL_API Time
 	{
 	public:
-		std::chrono::duration<double> TimePast;
-		std::chrono::duration<double> DeltaTime;
+		double TimePast;
+		double DeltaTime;
 		Time();
 		~Time();
 
@@ -19,9 +21,9 @@ namespace Chernobyl {
 		double ToSeconds(std::string time);
 
 	private:
-		std::chrono::time_point<std::chrono::system_clock> EndTime;
-		std::chrono::time_point<std::chrono::system_clock> StartTime;
-		std::chrono::time_point<std::chrono::system_clock> InitClock;
+		std::chrono::time_point<std::chrono::steady_clock> EndTime;
+		std::chrono::time_point<std::chrono::steady_clock> StartTime;
+		std::chrono::time_point<std::chrono::steady_clock> InitClock;
 	};
 }
 

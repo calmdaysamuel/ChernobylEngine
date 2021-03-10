@@ -66,7 +66,7 @@ namespace Chernobyl
 		std::map<std::string, std::vector<std::function<bool(void)>>> buyIfBindings;
 		std::map<std::string, std::vector<std::function<bool(void)>>> sellIfBindings;
 		std::map<std::string, std::vector<std::function<bool(void)>>> sellAllIfBindings;
-		std::map<std::vector<std::function<bool(void)>>, std::vector<std::function<void(void)>>> ifBindings;
+		std::vector<std::tuple<std::function<bool(void)>, std::function<void(void)>>> ifBindings;
 		std::map<std::string, std::vector<std::function<void(Trade)>>> onTradeRecievedBindings;
 		std::map<std::string, std::vector<std::function<void(void)>>> keyBinding;
 		std::string UNIVERSAL_RECEIVED_BINDING = "UNIVERSAL_RECEIVED_BINDING";

@@ -31,11 +31,24 @@ namespace Chernobyl
 		everyTimeAmountBinding[ApplicationTime.ToSeconds(time)].push_back(func);
 	}
 
+	//Binding Functions
+	void TradingApplication::BindTradeReceived(std::string symbol, std::function<void(Trade)> func)
+	{
+		onTradeRecievedBindings[symbol].push_back(func);
+	}
 
+	void TradingApplication::BindAnyTradeReceived(std::function<void(Trade)> func)
+	{
+		onTradeRecievedBindings[UNIVERSAL_RECEIVED_BINDING].push_back(func);
+	}
+
+	void TradingApplication::BindToKey(std::string key, std::function<void(void)> func)
+	{
+
+		keyBinding[key].push_back(func);
+	}
 
 	//Helper Functions
-	
-
 	void TradingApplication::CompareNeighboringTrades(std::string symbol, std::function<void(Trade, Trade)> func)
 	{
 
@@ -53,26 +66,11 @@ namespace Chernobyl
 
 	void TradingApplication::OnTradeReceived(std::string symbol)
 	{
-		//onTradeRecievedBindings[symbol](Trade());
-		//onTradeRecievedBindings[UNIVERSAL_RECEIVED_BINDING](Trade());
+
+
 	}
 
-	//Binding Functions
-	void TradingApplication::BindTradeReceived(std::string symbol, std::function<void(Trade)> func)
-	{
-		onTradeRecievedBindings[symbol].push_back(func);
-	}
-
-	void TradingApplication::BindAnyTradeReceived(std::function<void(Trade)> func)
-	{
-		onTradeRecievedBindings[UNIVERSAL_RECEIVED_BINDING].push_back(func);
-	}
 	
-	void TradingApplication::BindToKey(std::string key, std::function<void(void)> func)
-	{
-		
-		keyBinding[key].push_back(func);
-	}
 
 	//Buy
 	void TradingApplication::BuyWithLimit(std::string symbol, int amount, float limitPrice) 
@@ -152,9 +150,25 @@ namespace Chernobyl
 
 	}
 
+
+
+	void TradingApplication::If(std::function<bool(void)> condition, std::function<void(void)> func)
+	{
+		auto temp = std::make_tuple(condition, func);
+
+		ifBindings.push_back(temp);
+	}
+
 	void TradingApplication::ExecuteConditionals()
 	{
 		
+		for (auto value : ifBindings)
+		{
+			if (std::get<0>(value))
+			{
+				std::get<1>(value);
+			}
+		}
 
 	}
 

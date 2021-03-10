@@ -12,7 +12,7 @@ namespace Chernobyl
 
 	}
 
-	double Time::ToSeconds(std::string time)
+	int Time::ToSeconds(std::string time)
 	{
 		std::string hh = "0";
 		std::string mm = "0";

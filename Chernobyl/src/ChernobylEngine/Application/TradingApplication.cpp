@@ -17,70 +17,61 @@ namespace Chernobyl
 	//Subscription
 	void TradingApplication::Subscribe(std::string symbol)
 	{
-		Subscription[symbol] = new Quote(symbol);
-		Subscription[symbol]->Subscribe();
 	}
 
 	//Time Functions
-	void TradingApplication::AfterTimeAmount(std::string time, void(*func)())
+	void TradingApplication::AfterTimeAmount(std::string time, std::function<void(void)> func)
 	{
-		afterTimeAmountBinding[time].push_back(func);
-		timeAmountValues.insert(time);
+		
+		afterTimeAmountBinding[ApplicationTime.ToSeconds(time)].push_back(func);
 	}
 
-	void TradingApplication::EveryTimeAmount(std::string time, void(*func)())
+	void TradingApplication::EveryTimeAmount(std::string time, std::function<void(void)> func)
 	{
-		everyTimeAmountBinding[time].push_back(func);
-		timeAmountValues.insert(time);
+		everyTimeAmountBinding[ApplicationTime.ToSeconds(time)].push_back(func);
 	}
+
+
 
 	//Helper Functions
-	template<class T>
-	void TradingApplication::ForEachTrade(std::string symbol, void(*func)(Trade))
+	
+
+	void TradingApplication::CompareNeighboringTrades(std::string symbol, std::function<void(Trade, Trade)> func)
 	{
 
 	}
 
-	template<class T>
-	void TradingApplication::CompareNeighboringTrades(std::string symbol, void(*func)(Trade, Trade))
+	void TradingApplication::CompareIntervals(std::string symbol, int i, std::function<void(Trade, Trade)> func)
 	{
 
 	}
 
-	template<class T>
-	void TradingApplication::CompareIntervals(std::string symbol, int i, void(*func)(Trade, Trade))
-	{
-
-	}
-
-	template<class T>
-	void TradingApplication::CompareIntervals(std::string symbol, std::string time, void(*func)(Trade, Trade))
+	void TradingApplication::CompareIntervals(std::string symbol, std::string time, std::function<void(Trade, Trade)> func)
 	{
 
 	}
 
 	void TradingApplication::OnTradeReceived(std::string symbol)
 	{
-		onTradeRecievedBindings[symbol](Trade());
-		onTradeRecievedBindings[UNIVERSAL_RECEIVED_BINDING](Trade());
+		//onTradeRecievedBindings[symbol](Trade());
+		//onTradeRecievedBindings[UNIVERSAL_RECEIVED_BINDING](Trade());
 	}
 
 	//Binding Functions
-	void TradingApplication::BindTradeReceived(std::string symbol, void(*func)(Trade))
+	void TradingApplication::BindTradeReceived(std::string symbol, std::function<void(Trade)> func)
 	{
-		onTradeRecievedBindings[symbol] = func;
+		onTradeRecievedBindings[symbol].push_back(func);
 	}
 
-	void TradingApplication::BindAnyTradeReceived(void(*func)(Trade))
+	void TradingApplication::BindAnyTradeReceived(std::function<void(Trade)> func)
 	{
-		onTradeRecievedBindings[UNIVERSAL_RECEIVED_BINDING] = func;
+		onTradeRecievedBindings[UNIVERSAL_RECEIVED_BINDING].push_back(func);
 	}
 	
-	void TradingApplication::BindToKey(std::string key, void(*func)())
+	void TradingApplication::BindToKey(std::string key, std::function<void(void)> func)
 	{
-		//TODO: BINDS A KEY ON THE KEYBOARD TO A FUNCTION
-		//TODO: USEFUL FOR LOGGING OR CHANGING ALGORITHM
-
+		
+		keyBinding[key].push_back(func);
 	}
 
 	//Buy
@@ -115,6 +106,12 @@ namespace Chernobyl
 
 	}
 
+
+
+
+
+
+
 	//Step Functions
 	void TradingApplication::Awake()
 	{
@@ -133,75 +130,41 @@ namespace Chernobyl
 
 	void TradingApplication::ExecuteTimedBindings()
 	{
-		for (auto value : timeAmountValues)
+		if (ApplicationTime.TimePast == lastTime)
 		{
-			if (ApplicationTime.ToSeconds(value))
-			{
-				if (everyTimeAmountBinding.find(value) != everyTimeAmountBinding.end())
+			return;
+		}
+		lastTime = ApplicationTime.TimePast;
+		for (auto value : everyTimeAmountBinding)
+		{
+			
+			if (ApplicationTime.TimePast % value.first == 0 && ApplicationTime.TimePast >= value.first) {
+				
+				for (auto func : value.second)
 				{
-					for (auto func : afterTimeAmountBinding[""])
-					{
-						func();
-					}
+					func();
 				}
-
-				if (afterTimeAmountBinding.find(value) != afterTimeAmountBinding.end())
-				{
-					for (auto func : everyTimeAmountBinding[""])
-					{
-						func();
-					}
-				}
+				
 			}
 
 		}
+
 
 	}
 
 	void TradingApplication::ExecuteConditionals()
 	{
-		for (auto value: buyIfBindings)
-		{
-			if (value.second())
-			{
-				Buy(value.first, 1);
-			}
-		}
-
-		for (auto value : sellIfBindings)
-		{
-			if (value.second())
-			{
-				Sell(value.first, 1);
-			}
-		}
-
-		for (auto value : sellIfBindings)
-		{
-			if (value.second())
-			{
-				SellAll(value.first);
-			}
-		}
-
-		for (auto value : ifBindings)
-		{
-			if (value.first())
-			{
-				value.second();
-			}
-		}
+		
 
 	}
 
 	//Execute Application
 	void TradingApplication::Run()
 	{
-		std::cout << "Runing" << std::endl;
+		std::cout << "Runing ..." << std::endl;
 		Awake();
 		while (true)
 		{
-			
 			ApplicationTime.SetStartTime();
 			Update();
 			LateUpdate();

@@ -9,8 +9,8 @@ namespace Chernobyl {
 	class CHERNOBYL_API Time
 	{
 	public:
-		double TimePast;
-		double DeltaTime;
+		int TimePast;
+		int DeltaTime;
 		Time();
 		~Time();
 
@@ -18,7 +18,7 @@ namespace Chernobyl {
 		void SetStartTime();
 		void SetTimePast();
 		void SetEndTime();
-		double ToSeconds(std::string time);
+		int ToSeconds(std::string time);
 
 	private:
 		std::chrono::time_point<std::chrono::steady_clock> EndTime;

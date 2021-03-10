@@ -4,6 +4,8 @@
 #include "../DataModels/Quote.h"
 #include "../DataModels/Trade.h"
 #include <set>
+#include <functional>
+#include <DataModels/Account.h>
 namespace Chernobyl
 {
 	class CHERNOBYL_API TradingApplication : public Application
@@ -23,26 +25,24 @@ namespace Chernobyl
 		virtual void Awake();
 		void Run();
 
-		virtual void BindTradeReceived(std::string symbol, void(*func)(Trade));
-		virtual void BindAnyTradeReceived(void(*func)(Trade));
-		void BindToKey(std::string key, void(*func)());
+		virtual void BindTradeReceived(std::string symbol, std::function<void(Trade)> func);
+		virtual void BindAnyTradeReceived(std::function<void(Trade)> func);
+		void BindToKey(std::string key, std::function<void(void)> func);
 		void Subscribe(std::string symbol);
 
-		void AfterTimeAmount(std::string time, void(*func)());
-		void EveryTimeAmount(std::string time, void(*func)());
+		void AfterTimeAmount(std::string time, std::function<void(void)> func);
+		void EveryTimeAmount(std::string time, std::function<void(void)> func);
 
-		template<class T>
-		void ForEachTrade(std::string symbol, void(*func)(Trade));
+		void ForEachTrade(std::string symbol, std::function<void(Trade)> func);
 
-		template<class T>
-		void CompareNeighboringTrades(std::string symbol, void(*func)(Trade, Trade));
+		void CompareNeighboringTrades(std::string symbol, std::function<void(Trade, Trade)> func);
 
-		template<class T>
-		void CompareIntervals(std::string symbol, int i, void(*func)(Trade, Trade));
+		void CompareIntervals(std::string symbol, int i, std::function<void(Trade, Trade)> func);
 
-		template<class T>
-		void CompareIntervals(std::string symbol, std::string time, void(*func)(Trade, Trade));
+		void CompareIntervals(std::string symbol, std::string time, std::function<void(Trade, Trade)> func);
 
+
+		
 		//Buy And Sell
 		void BuyWithLimit(std::string symbol, int amount, float limitPrice = 1);
 		void Buy(std::string symbol, int amount);
@@ -52,10 +52,10 @@ namespace Chernobyl
 		void SellWithLimit(std::string symbol, int amount, float limitPrice = 1);
 
 		//Conditional Binding
-		void BuyIf(std::string symbol, int amount, bool(*condition)());
-		void SellIf(std::string symbol, int amount, bool(*condition)());
-		void SellAllIf(std::string symbol, bool(*condition)());
-		void If(bool(*condition)(), bool(*func)());
+		void BuyIf(std::string symbol, int amount, std::function<bool(void)> condition);
+		void SellIf(std::string symbol, int amount, std::function<bool(void)> condition);
+		void SellAllIf(std::string symbol, std::function<bool(void)> condition);
+		void If(std::function<bool(void)> condition, std::function<void(void)> func);
 	private:
 		void ExecuteConditionals();
 		void ExecuteTimedBindings();
@@ -63,15 +63,21 @@ namespace Chernobyl
 
 
 	private:
-		std::map<std::string, bool(*)()> buyIfBindings;
-		std::map<std::string, bool(*)()> sellIfBindings;
-		std::map<std::string, bool(*)()> sellAllIfBindings;
-		std::map<bool(*)(), void(*)()> ifBindings;
-		std::map<std::string, void(*)(Trade)> onTradeRecievedBindings;
-		std::map<std::string, std::vector<void(*)()>> everyTimeAmountBinding;
-		std::map<std::string, std::vector<void(*)()>> afterTimeAmountBinding;
+		std::map<std::string, std::vector<std::function<bool(void)>>> buyIfBindings;
+		std::map<std::string, std::vector<std::function<bool(void)>>> sellIfBindings;
+		std::map<std::string, std::vector<std::function<bool(void)>>> sellAllIfBindings;
+		std::map<std::vector<std::function<bool(void)>>, std::vector<std::function<void(void)>>> ifBindings;
+		std::map<std::string, std::vector<std::function<void(Trade)>>> onTradeRecievedBindings;
+		std::map<std::string, std::vector<std::function<void(void)>>> keyBinding;
 		std::string UNIVERSAL_RECEIVED_BINDING = "UNIVERSAL_RECEIVED_BINDING";
-		std::set<std::string> timeAmountValues = {};
+		
+		//Time
+		std::map<int, std::vector<std::function<void(void)>>> everyTimeAmountBinding;
+		std::map<int, std::vector<std::function<void(void)>>> afterTimeAmountBinding;
+		int lastTime = -1;
+
+		Account account;
+
 	};
 }
 

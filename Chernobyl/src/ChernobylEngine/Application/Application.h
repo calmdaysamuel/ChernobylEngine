@@ -2,6 +2,7 @@
 #include "../Core/ChernobylCore.h"
 #include "../Timer/Time.h"
 
+
 namespace Chernobyl
 {
 	class CHERNOBYL_API Application

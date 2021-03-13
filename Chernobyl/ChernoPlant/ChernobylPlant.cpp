@@ -13,21 +13,26 @@ class TestApplication: public Chernobyl::TradingApplication
 	std::string greeting = "hello";
 	void Awake()
 	{
+		std::cout << "Awaking\n";
+
+		// For testing only
+		auto* ws = new Chernobyl::WebSocket("ws://echo.websocket.org");
+
 		//with lambda function
-		EveryTimeAmount(
+		/*EveryTimeAmount(
 			
 			"00:00:2", 
 			[this]() 
 			{
 				std::cout << this->ApplicationTime.TimePast << std::endl;
 			}
-		);
+		);*/
 
 		// with class member
-		EveryTimeAmount("00:00:05", std::bind(&TestApplication::hello, this));
+		//EveryTimeAmount("00:00:05", std::bind(&TestApplication::hello, this));
 
 		// with external function
-		EveryTimeAmount("00:00:11", hi);
+		//EveryTimeAmount("00:00:11", hi);
 	}
 
 	void hello()

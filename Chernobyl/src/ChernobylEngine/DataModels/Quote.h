@@ -45,13 +45,13 @@ namespace Chernobyl
 	public:
 		void Subscribe()
 		{
-			webSocket = new WebSocket("wss://ws.finnhub.io?token=c0g8rn748v6ob1prm39g&symbol=AAPL");
+			//webSocket = new WebSocket("wss://ws.finnhub.io?token=c0g8rn748v6ob1prm39g&symbol=AAPL");
 		}
 
 		void GetQuote()
 		{
 
-			std::cout << "Getting Quote" << std::endl;
+			/*std::cout << "Getting Quote" << std::endl;
 			auto data = API::QuoteRequestJSON("https://finnhub.io/api/v1/quote?symbol=AAPL&token=c0g8rn748v6ob1prm39g");
 			
 			openPrice = data.at(L"o").as_number().to_double();
@@ -59,7 +59,7 @@ namespace Chernobyl
 			lowPrice = data.at(L"l").as_number().to_double();
 			currentPrice = data.at(L"c").as_number().to_double();
 			previousClosePrice = data.at(L"pc").as_number().to_double();
-			std::cout << symbol << openPrice << lowPrice << std::endl;
+			std::cout << symbol << openPrice << lowPrice << std::endl;*/
 				                    // Common utilities like string conversions
 				//using namespace web;                        // Common features like URIs.
 				//using namespace web::http;                  // Common HTTP functionality

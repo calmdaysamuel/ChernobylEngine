@@ -39,10 +39,12 @@ class TestApplication: public Chernobyl::TradingApplication
 	{
 		std::cout << greeting << std::endl;
 	}
-	void TradeReceived(Chernobyl::Trade& trade)
+	
+	void printTrade(Chernobyl::Trade trade)
 	{
-
+		std::cout << trade.ToString() << std::endl;
 	}
+
 };
 
 Chernobyl::Application* CreateApplication()

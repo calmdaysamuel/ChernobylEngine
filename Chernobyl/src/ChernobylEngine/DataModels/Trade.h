@@ -1,5 +1,6 @@
 #pragma once
 #include "ChernobylEngine/Core/ChernobylCore.h"
+
 namespace Chernobyl
 {
 	class CHERNOBYL_API Trade
@@ -21,6 +22,8 @@ namespace Chernobyl
 			std::string v,
 			std::string tc
 		);
+
+		std::string ToString();
 
 		
 	};

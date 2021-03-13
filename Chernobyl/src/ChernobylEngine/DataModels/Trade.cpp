@@ -20,4 +20,9 @@ namespace Chernobyl
 
 	}
 
+	std::string Trade::ToString()
+	{
+		return "";
+	}
+
 }

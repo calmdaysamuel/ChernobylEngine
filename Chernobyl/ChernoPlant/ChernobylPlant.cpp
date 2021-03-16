@@ -14,9 +14,8 @@ class TestApplication: public Chernobyl::TradingApplication
 	void Awake()
 	{
 		std::cout << "Awaking\n";
-
-		// For testing only
-		auto* ws = new Chernobyl::WebSocket("ws://echo.websocket.org");
+		Subscribe("AAPL");
+		Subscribe("MSFT");
 
 		//with lambda function
 		/*EveryTimeAmount(

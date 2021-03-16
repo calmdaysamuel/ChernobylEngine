@@ -3,9 +3,9 @@
 namespace Chernobyl
 {
 	Trade::Trade(std::string s,
-		std::string lp,
+		float lp,
 		std::string ts,
-		std::string v,
+		float v,
 		std::string tc)
 	{
 		symbol = s;
@@ -24,5 +24,4 @@ namespace Chernobyl
 	{
 		return "";
 	}
-
 }

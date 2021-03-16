@@ -1,12 +1,13 @@
 #include "TradingApplication.h"
 #include "../Timer/Time.h"
+#include "../Networking/WebSocket.h"
 
 namespace Chernobyl
 {
 	//Constructor and Destructor
 	TradingApplication::TradingApplication()
 	{
-
+		ws = new WebSocket("wss://ws.finnhub.io?token=c0g8rn748v6ob1prm39g", std::bind(&TradingApplication::OnTradeReceived, this, std::placeholders::_1));
 	}
 
 	TradingApplication::~TradingApplication()
@@ -17,12 +18,20 @@ namespace Chernobyl
 	//Subscription
 	void TradingApplication::Subscribe(std::string symbol)
 	{
+		if (subscriptions.find(symbol) == subscriptions.end()) {
+			bool messageSent = ws->sendMessage("{ \"type\":\"subscribe\",\"symbol\" : \"" + symbol +"\" }");
+			if (messageSent) {
+				subscriptions[symbol] = new Subscription(symbol);
+				return;
+			}
+			// Throw network error exception here, cannot make subscription
+		}
+
 	}
 
 	//Time Functions
 	void TradingApplication::AfterTimeAmount(std::string time, std::function<void(void)> func)
 	{
-		
 		afterTimeAmountBinding[ApplicationTime.ToSeconds(time)].push_back(func);
 	}
 
@@ -44,7 +53,6 @@ namespace Chernobyl
 
 	void TradingApplication::BindToKey(std::string key, std::function<void(void)> func)
 	{
-
 		keyBinding[key].push_back(func);
 	}
 
@@ -64,10 +72,9 @@ namespace Chernobyl
 
 	}
 
-	void TradingApplication::OnTradeReceived(std::string symbol)
+	void TradingApplication::OnTradeReceived(Trade* trade)
 	{
-
-
+			subscriptions[trade->symbol]->addTrade(trade);
 	}
 
 	
@@ -103,11 +110,6 @@ namespace Chernobyl
 	{
 
 	}
-
-
-
-
-
 
 
 	//Step Functions

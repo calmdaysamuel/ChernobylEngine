@@ -8,24 +8,22 @@ namespace Chernobyl
 	public:
 		
 			std::string symbol;
-			std::string lastPrice;
+			float lastPrice;
 			std::string timeStamp;
-			std::string volume;
+			float volume;
 			std::string tradeConditions;
 	
 	public:
 		Trade();
 		Trade(
 			std::string s,
-			std::string lp,
+			float lp,
 			std::string ts,
-			std::string v,
+			float v,
 			std::string tc
 		);
 
 		std::string ToString();
-
-		
 	};
 }
 

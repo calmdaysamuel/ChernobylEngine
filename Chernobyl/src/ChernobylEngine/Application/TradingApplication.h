@@ -3,6 +3,7 @@
 #include "../Core/ChernobylCore.h"
 #include "../DataModels/Quote.h"
 #include "../DataModels/Trade.h"
+#include "../DataModels/Subscription.h"
 #include <set>
 #include <functional>
 #include <DataModels/Account.h>
@@ -11,10 +12,11 @@ namespace Chernobyl
 	class CHERNOBYL_API TradingApplication : public Application
 	{
 	public:
-		std::map<std::string, Quote*> Subscription;
+		std::map<std::string, Subscription*> subscriptions;
 		bool tradeReceived = false;
 		Trade lastestTrade;
 		std::string symbol;
+		WebSocket* ws;
 
 	public:
 		TradingApplication();
@@ -59,7 +61,7 @@ namespace Chernobyl
 	private:
 		void ExecuteConditionals();
 		void ExecuteTimedBindings();
-		void OnTradeReceived(std::string symbol);
+		void OnTradeReceived(Trade* trade);
 
 
 	private:

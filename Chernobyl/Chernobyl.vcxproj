@@ -183,6 +183,7 @@
     <ClInclude Include="src\ChernobylEngine\Utilities\Utils.h" />
     <ClInclude Include="src\ChernobylEngine\DataModels\Trade.h" />
     <ClInclude Include="src\ChernobylEngine\Networking\WebSocket.h" />
+    <ClInclude Include="src\ChernobylEngine\DataModels\Subscription.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ChernobylEngine\DataModels\Account.cpp" />
@@ -199,6 +200,7 @@
     <ClCompile Include="src\ChernobylEngine\Application\TradingApplication.cpp" />
     <ClCompile Include="ChernoPlant\ChernobylPlant.cpp" />
     <ClCompile Include="src\ChernobylEngine\Networking\WebSocket.cpp" />
+    <ClCompile Include="src\ChernobylEngine\DataModels\Subscription.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

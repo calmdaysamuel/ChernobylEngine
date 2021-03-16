@@ -11,8 +11,9 @@ namespace Chernobyl
 	public:
 		Subscription(std::string);
 		void addTrade(Trade*);
+		std::vector<Trade*> trades;
 	private:
 		std::string ticker;
-		std::vector<Trade*> trades;
+		
 	};
 }

@@ -11,6 +11,7 @@ void hi()
 class TestApplication: public Chernobyl::TradingApplication
 {
 	std::string greeting = "hello";
+
 	void Awake()
 	{
 		std::cout << "Awaking\n";
@@ -18,14 +19,29 @@ class TestApplication: public Chernobyl::TradingApplication
 		Subscribe("MSFT");
 
 		//with lambda function
-		/*EveryTimeAmount(
+		EveryTimeAmount(
 			
-			"00:00:2", 
+			"00:00:3", 
 			[this]() 
 			{
-				std::cout << this->ApplicationTime.TimePast << std::endl;
+				auto trade = this->subscriptions["AAPL"]->trades;
+				auto sTrade = trade[trade.size() - 1];
+				std::cout << sTrade->symbol << std::endl;
+				std::cout << sTrade->lastPrice << std::endl;
 			}
-		);*/
+		);
+
+		EveryTimeAmount(
+
+			"00:00:3",
+			[this]()
+			{
+				auto trade = this->subscriptions["MSFT"]->trades;
+				auto sTrade = trade[trade.size() - 1];
+				std::cout << sTrade->symbol << std::endl;
+				std::cout << sTrade->lastPrice << std::endl;
+			}
+		);
 
 		// with class member
 		//EveryTimeAmount("00:00:05", std::bind(&TestApplication::hello, this));

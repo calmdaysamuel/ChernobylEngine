@@ -75,6 +75,8 @@ namespace Chernobyl
 	void TradingApplication::OnTradeReceived(Trade* trade)
 	{
 			subscriptions[trade->symbol]->addTrade(trade);
+
+			
 	}
 
 	

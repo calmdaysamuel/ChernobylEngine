@@ -10,10 +10,10 @@ namespace Chernobyl
 	{
 	public:
 		Subscription(std::string);
-		void addTrade(Trade*);
-		std::vector<Trade*> trades;
+		void AddTrade(Trade*);
+		std::vector<Trade*> tradeStream;
 	private:
-		std::string ticker;
+		std::string symbol;
 		
 	};
 }

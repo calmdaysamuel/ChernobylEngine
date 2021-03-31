@@ -3,10 +3,10 @@
 namespace Chernobyl
 {
 	Subscription::Subscription(std::string ticker) {
-		this->ticker = ticker;
+		this->symbol = ticker;
 	}
 
-	void Subscription::addTrade(Trade* trade) {
-		trades.push_back(trade);
+	void Subscription::AddTrade(Trade* trade) {
+		tradeStream.push_back(trade);
 	}
 }

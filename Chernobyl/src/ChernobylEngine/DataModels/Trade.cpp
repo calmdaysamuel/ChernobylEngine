@@ -2,17 +2,13 @@
 
 namespace Chernobyl
 {
-	Trade::Trade(std::string s,
-		float lp,
-		std::string ts,
-		float v,
-		std::string tc)
+	Trade::Trade(std::string s, float lp, std::string ts, float v, std::string tc)
 	{
-		symbol = s;
-		lastPrice = lp;
-		timeStamp = ts;
-		volume = v;
-		tradeConditions = tc;
+		this->symbol = s;
+		this->lastPrice = lp;
+		this->timeStamp = ts;
+		this->volume = v;
+		this->tradeConditions = tc;
 	}
 
 	Trade::Trade()

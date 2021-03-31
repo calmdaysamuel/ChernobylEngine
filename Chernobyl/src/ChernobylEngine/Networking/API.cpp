@@ -3,36 +3,22 @@
 namespace Chernobyl
 {
 
-	web::json::value API::QuoteRequestJSON(std::string requestQuery)
+	
+
+	web::json::value API::GetRequest(std::string requestQuery)
 	{
-		return web::json::value::parse(utility::conversions::to_string_t(GetRequest(requestQuery)));
+		return web::json::value();
 	}
 
-	std::string API::QuoteRequestString(std::string requestQuery)
+	Quote API::JsonToQuote(web::json::value quoteObj)
 	{
-		return GetRequest(requestQuery);
+		return Quote();
 	}
 
-	std::string API::GetRequest(std::string requestQuery)
+	Quote API::GetQuote(std::string symbol)
 	{
-		web::http::client::http_client client(utility::conversions::to_string_t(requestQuery));
-
-		web::http::uri_builder builder(U("SADA"));
-
-		std::string responseString;
-		auto hr = client.request(web::http::methods::GET)
-
-			.then(
-				[=](web::http::http_response response)
-				{
-					std::string data(utility::conversions::to_utf8string(response.extract_string().get()));
-					return data;
-				}
-			);
-
-		responseString = hr.get();
-
-		return responseString;
+		std::string url = "";
+		return API::JsonToQuote(API::GetRequest(url + ""));
 	}
 
 

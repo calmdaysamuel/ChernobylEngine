@@ -19,33 +19,12 @@ class TestApplication: public Chernobyl::TradingApplication
 		Subscribe("MSFT");
 
 		//with lambda function
-		EveryTimeAmount(
-			
-			"00:00:3", 
-			[this]() 
-			{
-				auto trade = this->subscriptions["AAPL"]->trades;
-				auto sTrade = trade[trade.size() - 1];
-				std::cout << sTrade->symbol << std::endl;
-				std::cout << sTrade->lastPrice << std::endl;
-			}
-		);
-
-		EveryTimeAmount(
-
-			"00:00:3",
-			[this]()
-			{
-				auto trade = this->subscriptions["MSFT"]->trades;
-				auto sTrade = trade[trade.size() - 1];
-				std::cout << sTrade->symbol << std::endl;
-				std::cout << sTrade->lastPrice << std::endl;
-			}
-		);
+		
 
 		// with class member
-		//EveryTimeAmount("00:00:05", std::bind(&TestApplication::hello, this));
-
+		EveryTimeAmount("00:00:05", [this]() {Buy("AAPL", 5); });
+		EveryTimeAmount("00:00:03", [this]() {Sell("AAPL", 1); });
+		EveryTimeAmount("2", [this]() {std::cout << portfolio.GetPosition("AAPL").amount << std::endl; });
 		// with external function
 		//EveryTimeAmount("00:00:11", hi);
 	}

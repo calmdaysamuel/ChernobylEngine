@@ -15,13 +15,7 @@ namespace Chernobyl
 	
 	public:
 		Trade();
-		Trade(
-			std::string s,
-			float lp,
-			std::string ts,
-			float v,
-			std::string tc
-		);
+		Trade(std::string s, float lp, std::string ts, float v, std::string tc);
 
 		std::string ToString();
 	};

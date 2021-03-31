@@ -165,7 +165,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\ChernobylEngine\DataModels\Account.h" />
+    <ClInclude Include="src\ChernobylEngine\DataModels\Position.h" />
+    <ClInclude Include="src\ChernobylEngine\DataModels\Currency.h" />
+    <ClInclude Include="src\ChernobylEngine\DataModels\Portfolio.h" />
     <ClInclude Include="src\ChernobylEngine\DataModels\Candle.h" />
     <ClInclude Include="src\ChernobylEngine\Networking\API.h" />
     <ClInclude Include="src\ChernobylEngine\DataModels\Quote.h" />
@@ -186,7 +188,9 @@
     <ClInclude Include="src\ChernobylEngine\DataModels\Subscription.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\ChernobylEngine\DataModels\Account.cpp" />
+    <ClCompile Include="src\ChernobylEngine\DataModels\Position.cpp" />
+    <ClCompile Include="src\ChernobylEngine\DataModels\Currency.cpp" />
+    <ClCompile Include="src\ChernobylEngine\DataModels\Portfolio.cpp" />
     <ClCompile Include="src\ChernobylEngine\DataModels\Candle.cpp" />
     <ClCompile Include="src\ChernobylEngine\Networking\API.cpp" />
     <ClCompile Include="src\ChernobylEngine\DataModels\Quote.cpp" />

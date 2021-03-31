@@ -24,7 +24,7 @@ namespace Chernobyl
 
 	void TrainingApplication::Subscribe(std::string symbol, std::string from, std::string to, int resolution)
 	{
-		subscription[symbol] = Quote("AAPL").GetCandles();
+		// subscription[symbol] = Quote("AAPL").GetCandles();
 	}
 
 	std::vector<Candle>* TrainingApplication::GetData(std::string symbol)

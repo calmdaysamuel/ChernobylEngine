@@ -12,22 +12,19 @@ namespace Chernobyl
 
 	}
 
+	int Time::ToMilliSeconds(std::string time)
+	{
+		
+		return (stoi(time.substr(0, 2)) * 3600 + stoi(time.substr(3, 2)) * 60 + stoi(time.substr(6, 2)) * 1000) + stoi(time.substr(9, 3));
+	}
 	int Time::ToSeconds(std::string time)
 	{
-		std::string hh = "0";
-		std::string mm = "0";
-		std::string ss = "0";
-
-		hh = time.substr(0, 2);
-		mm = time.substr(3, 2);
-		ss = time.substr(6, 2);
-
-		return stoi(hh) * 3600 + stoi(mm) * 60 + stoi(ss);
+		return stoi(time.substr(0, 2)) * 3600 + stoi(time.substr(3, 2)) * 60 + stoi(time.substr(6, 2));
 	}
 	void Time::SetDeltaTime()
 	{
 		 
-		 DeltaTime =  std::chrono::duration_cast<std::chrono::milliseconds>(EndTime - StartTime).count() / 1000;
+		 DeltaTime =  std::chrono::duration_cast<std::chrono::milliseconds>(EndTime - StartTime).count();
 	}
 
 	void Time::SetStartTime()
@@ -41,6 +38,6 @@ namespace Chernobyl
 
 	void Time::SetTimePast()
 	{
-		TimePast = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - InitClock).count() / 1000;
+		TimePast = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - InitClock).count();
 	}
 }

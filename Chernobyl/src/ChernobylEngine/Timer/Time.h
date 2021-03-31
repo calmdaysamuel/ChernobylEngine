@@ -5,7 +5,7 @@
 
 namespace Chernobyl {
 
-	// Time format hh:mm:ss
+	// Time format hh:mm:ss:nnn
 	class CHERNOBYL_API Time
 	{
 	public:
@@ -18,8 +18,8 @@ namespace Chernobyl {
 		void SetStartTime();
 		void SetTimePast();
 		void SetEndTime();
+		int ToMilliSeconds(std::string time);
 		int ToSeconds(std::string time);
-
 	private:
 		std::chrono::time_point<std::chrono::steady_clock> EndTime;
 		std::chrono::time_point<std::chrono::steady_clock> StartTime;

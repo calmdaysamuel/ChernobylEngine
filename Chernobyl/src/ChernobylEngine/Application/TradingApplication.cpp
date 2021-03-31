@@ -82,15 +82,15 @@ namespace Chernobyl
 
 	void TradingApplication::ExecuteTimedBindings()
 	{
-		if (ApplicationTime.TimePast == lastTime)
+		if (ApplicationTime.TimePast / 1000 == lastTime)
 		{
 			return;
 		}
-		lastTime = ApplicationTime.TimePast;
+		lastTime = ApplicationTime.TimePast / 1000;
 		for (auto value : everyTimeAmountBinding)
 		{
 
-			if (ApplicationTime.TimePast % value.first == 0 && ApplicationTime.TimePast >= value.first) {
+			if (ApplicationTime.TimePast / 1000 % value.first == 0 && ApplicationTime.TimePast / 1000 >= value.first) {
 
 				for (auto func : value.second)
 				{

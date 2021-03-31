@@ -19,8 +19,8 @@ class TestApplication: public Chernobyl::TradingApplication
 		Subscribe("AAPL");
 		Subscribe("MSFT");
 		// with class member
-		EveryTimeAmount("00:00:05", [this]() {Sell("VOO", 5); });
-		EveryTimeAmount("00:00:03", [this]() {Buy("VOO", 10); });
+		//EveryTimeAmount("00:00:05", [this]() {Sell("VOO", 5); });
+		//EveryTimeAmount("00:00:03", [this]() {Buy("VOO", 10); });
 		EveryTimeAmount("00:00:10", [this]() {std::cout << portfolio.ToString() << std::endl; });
 		// with external function
 		//EveryTimeAmount("00:00:11", hi);

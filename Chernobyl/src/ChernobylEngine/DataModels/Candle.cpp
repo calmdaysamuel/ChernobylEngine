@@ -10,4 +10,15 @@ namespace Chernobyl
 		this->lowPrice = lp;
 	}
 
+	std::string Candle::ToString()
+	{
+		std::string output = "{\n" +
+			std::to_string(openPrice) + "\n" +
+			std::to_string(closePrice) + "\n" +
+			std::to_string(highPrice) + "\n" +
+			std::to_string(lowPrice) + "\n" +
+			"}/n";
+		return std::string();
+	}
+
 }

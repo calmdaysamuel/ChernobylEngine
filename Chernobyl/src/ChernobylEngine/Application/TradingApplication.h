@@ -11,6 +11,7 @@ namespace Chernobyl
 {
 	class CHERNOBYL_API TradingApplication : public Application
 	{
+		
 	public:
 		TradingApplication();
 		~TradingApplication();

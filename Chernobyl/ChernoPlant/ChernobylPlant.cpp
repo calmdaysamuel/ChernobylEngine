@@ -15,16 +15,13 @@ class TestApplication: public Chernobyl::TradingApplication
 	void Awake()
 	{
 		std::cout << "Awaking\n";
+		Subscribe("VOO");
 		Subscribe("AAPL");
 		Subscribe("MSFT");
-
-		//with lambda function
-		
-
 		// with class member
-		EveryTimeAmount("00:00:05", [this]() {Buy("AAPL", 5); });
-		EveryTimeAmount("00:00:03", [this]() {Sell("AAPL", 1); });
-		EveryTimeAmount("2", [this]() {std::cout << portfolio.GetPosition("AAPL").amount << std::endl; });
+		EveryTimeAmount("00:00:05", [this]() {Sell("VOO", 5); });
+		EveryTimeAmount("00:00:03", [this]() {Buy("VOO", 10); });
+		EveryTimeAmount("00:00:10", [this]() {std::cout << portfolio.ToString() << std::endl; });
 		// with external function
 		//EveryTimeAmount("00:00:11", hi);
 	}

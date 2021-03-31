@@ -115,6 +115,7 @@ namespace Chernobyl
 			bool messageSent = webSocket->sendMessage("{ \"type\":\"subscribe\",\"symbol\" : \"" + symbol + "\" }");
 			if (messageSent) {
 				subscriptions[symbol] = new Subscription(symbol);
+				portfolio.UpdatePosition(symbol, 0, 0.0);
 				return;
 			}
 			// Throw network error exception here, cannot make subscription

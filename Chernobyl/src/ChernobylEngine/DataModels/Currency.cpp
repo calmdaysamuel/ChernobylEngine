@@ -28,4 +28,9 @@ namespace Chernobyl
 	{
 		this->value *= value;
 	}
+	std::string Currency::ToString()
+	{
+		std::string output = symbol + " " + std::to_string(value);
+		return output;
+	}
 }

@@ -2,7 +2,7 @@
 
 namespace Chernobyl
 {
-	Trade::Trade(std::string s, float lp, std::string ts, float v, std::string tc)
+	Trade::Trade(std::string s, double lp, std::string ts, int v, std::string tc)
 	{
 		this->symbol = s;
 		this->lastPrice = lp;
@@ -18,6 +18,13 @@ namespace Chernobyl
 
 	std::string Trade::ToString()
 	{
-		return "";
+		std::string output = symbol + " {\n" + 
+			"Last Price: " + std::to_string(lastPrice) + "\n" + 
+			"Volume: " + std::to_string(volume) + "\n" + 
+			"Time Stamp: " + timeStamp + "\n"+ 
+			"Trade Conditions: " + tradeConditions + 
+			"\n}\n";
+
+		return output;
 	}
 }

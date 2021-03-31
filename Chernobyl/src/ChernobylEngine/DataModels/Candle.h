@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Utilities/Utils.h"
 namespace Chernobyl
 {
 	class Candle
@@ -11,6 +11,7 @@ namespace Chernobyl
 		double lowPrice;
 
 		Candle(double op, double cp, double hp, double lp);
+		std::string ToString();
 	};
 
 }

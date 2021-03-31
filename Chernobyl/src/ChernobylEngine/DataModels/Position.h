@@ -8,14 +8,16 @@ namespace Chernobyl
 	public:
 		std::string name;
 		std::string symbol;
-		int amount;
+		int amount = 0;
 		Currency value;
-		double costBasis;
+		double costBasis = 0 ;
 
 
 		Position(std::string symbol, int amount, double costBasis);
 		Position();
 		void UpdateValue(int amount, double value);
+
+		std::string ToString();
 	};
 }
 

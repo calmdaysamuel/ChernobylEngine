@@ -9,7 +9,19 @@ namespace Chernobyl
 		this->highPrice = highPrice;
 		this->lowPrice = lowPrice;
 		this->currentPrice = currentPrice;
-		this->previousClosePrice;
+		this->previousClosePrice = previousClosePrice;
+	}
+
+	std::string Quote::ToString()
+	{
+		std::string output = symbol + " {\n" + 
+			"Open Price: " + std::to_string(openPrice) + "\n" + 
+			"High Price: " + std::to_string(highPrice) + "\n" + 
+			"Low Price: " + std::to_string(lowPrice) + "\n" + 
+			"Current Price: " + std::to_string(currentPrice) + "\n" +
+			"Previous Close Price: " + std::to_string(previousClosePrice) + "\n" +
+			"}\n";
+		return output;
 	}
 
 	Quote::Quote()
